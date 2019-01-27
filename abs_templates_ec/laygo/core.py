@@ -700,7 +700,7 @@ class LaygoBase(TemplateBase, metaclass=abc.ABCMeta):
                       **kwargs):
 
         self._tr_manager = kwargs.get('tr_manager', None)
-        wire_names = kwargs.get('wire_names', None)
+        wire_names = kwargs.get('_wire_names', None)
         min_height = kwargs.get('min_height', 0)
 
         # error checking

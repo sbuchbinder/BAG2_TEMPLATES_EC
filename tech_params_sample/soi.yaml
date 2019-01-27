@@ -235,6 +235,10 @@ mos_analog:
   w_body:
     lch: [.inf]
     val: [100]
+  # Body contact style. True indicates should be finger style. False indicates should be solid OD
+  body_contact_style_finger:
+    lch: [.inf]
+    val: [True]
   # body PO coordinate.
   body_po_loc:
     lch: [.inf]

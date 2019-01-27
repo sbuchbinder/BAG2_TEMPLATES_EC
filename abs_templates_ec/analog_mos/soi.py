@@ -508,6 +508,7 @@ class MOSTechSOIGenericBC(MOSTech):
         num_via_body = mos_constants['num_via_body']
         md_w = mos_constants['md_w']
         mp_h = mos_constants['mp_h']
+        body_contact_style_finger = mos_constants['body_contact_style_finger']
 
         g_drc_info = self.get_conn_drc_info(lch_unit, 'g')
 
@@ -527,12 +528,21 @@ class MOSTechSOIGenericBC(MOSTech):
         od_box = od_box.move_by(dy=-sd_yc, unit_mode=True)
         self.draw_od(template, od_name, od_box, od_type='main')
         # draw body OD
-        b_od_yb = d_od_yt
-        b_od_yt = b_y_list[0][1]
-        b_od_xc = sd_pitch // 2
-        od_box = BBox(-w_body // 2, b_od_yb, w_body // 2, b_od_yt, res, unit_mode=True)
-        od_box = od_box.move_by(dx=b_od_xc, dy=-sd_yc, unit_mode=True)
-        self.draw_od(template, od_name, od_box, nx=fg, spx=sd_pitch, od_type='body')
+        if body_contact_style_finger:
+            # body OD is a finger per gate
+            b_od_yb = d_od_yt
+            b_od_yt = b_y_list[0][1]
+            b_od_xc = sd_pitch // 2
+            od_box = BBox(-w_body // 2, b_od_yb, w_body // 2, b_od_yt, res, unit_mode=True)
+            od_box = od_box.move_by(dx=b_od_xc, dy=-sd_yc, unit_mode=True)
+            self.draw_od(template, od_name, od_box, nx=fg, spx=sd_pitch, od_type='body')
+        else:
+            # body OD is a solid bar of equal width to main OD
+            b_od_yb = d_od_yt
+            b_od_yt = b_y_list[0][1]
+            od_box = BBox(-md_w // 2, b_od_yb, width + md_w // 2, b_od_yt, res, unit_mode=True)
+            od_box = od_box.move_by(dy=-sd_yc, unit_mode=True)
+            self.draw_od(template, od_name, od_box, od_type='body')
 
         # draw PO
         # draw gate PO bar
