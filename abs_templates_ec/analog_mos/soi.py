@@ -617,8 +617,18 @@ class MOSTechSOIGenericBC(MOSTech):
 
         # draw drain vias to connection layer
         d_yb, d_yt = d_y_list[-1]
+        self._draw_vertical_vias(template=template,
+                                 lch_unit=lch_unit,
+                                 x0=0,
+                                 num=fg + 1,
+                                 pitch=sd_pitch,
+                                 mx_yb=d_yb - sd_yc,
+                                 mx_yt=d_yt - sd_yc,
+                                 start_layer=0,
+                                 end_layer=1,
+                                 )
         self._draw_vertical_vias(template, lch_unit, 0, num_seg + 1, wire_pitch,
-                                 d_yb - sd_yc, d_yt - sd_yc, 0)
+                                 d_yb - sd_yc, d_yt - sd_yc, 1)
 
         # draw body vias to M1
         via_type = via_id_table[(od_name, m1_name)]
