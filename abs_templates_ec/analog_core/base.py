@@ -1962,7 +1962,7 @@ class AnalogBase(TemplateBase, metaclass=abc.ABCMeta):
                 True to allow half-block width.  Defaults to True.
             half_blk_y : bool
                 True to allow half-block height.  Defaults to True.
-            _wire_names : Dict[str, List[Dict[str, List[str]]]]
+            wire_names : Dict[str, List[Dict[str, List[str]]]]
                 specify gate/drain wire types instead of specifying number of tracks.
             tr_manager : TrackManager
                 the TrackManager used to plac wires.
@@ -1979,7 +1979,7 @@ class AnalogBase(TemplateBase, metaclass=abc.ABCMeta):
         half_blk_x = kwargs.get('half_blk_x', True)
         half_blk_y = kwargs.get('half_blk_y', True)
         tr_manager = kwargs.get('tr_manager', None)
-        wire_names = kwargs.get('_wire_names', None)
+        wire_names = kwargs.get('wire_names', None)
         min_height = kwargs.get('min_height', 0)
         ds2_no_po = kwargs.get('ds2_no_po', False)
         do_correct_v_pitch = kwargs.get('do_correct_v_pitch', False)

@@ -703,7 +703,8 @@ class MOSTechSOIGenericBC(MOSTech):
         po_yb = g_y_list[0][0] - sd_yc
         po_yt = b_po_y_list[0][0] - sp_gb_po - sd_yc
         od_yb = d_y_list[0][0] - sd_yc
-        od_yt = d_y_list[0][1] + w_delta - sd_yc
+        od_yt = d_y_list[0][1] + w_delta - sd_yc - sp_gb_po
+
         od_w = sd_pitch - lch_unit - 2 * po_od_spx
 
         if (edge_mode & 1) == 0:
@@ -725,7 +726,6 @@ class MOSTechSOIGenericBC(MOSTech):
 
         # get dummy PO X coordinates
         nx = (po_xcr - po_xcl) // sd_pitch + 1
-        po_yt = b_po_y_list[0][1] - sd_yc
         if nx > 0:
             # draw dummy PO
             po_box = BBox(po_xcl - lch2, po_yb, po_xcl + lch2, po_yt, res, unit_mode=True)
