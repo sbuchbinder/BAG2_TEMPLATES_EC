@@ -728,12 +728,25 @@ class MOSTechSOIGenericBC(MOSTech):
             # draw dummy PO
             po_box = BBox(po_xcl - lch2, po_yb, po_xcl + lch2, po_yt, res, unit_mode=True)
             template.add_rect(po_name, po_box, nx=nx, spx=sd_pitch, unit_mode=True)
+        # TODO: Check if this can be fixed
         # Do not draw od dummy, because it is misidentified as a diffusion requiring a contact.
-        od_xl = sd_pitch2 + lch2 + po_od_spx
-        od_xr = od_xl + od_w
-        if fg > 1:
-            od_box = BBox(od_xl, od_yb, od_xr, od_yt, res, unit_mode=True)
-            template.add_rect(od_name, od_box, nx=fg - 1, spx=sd_pitch, unit_mode=True)
+        # od_xl = sd_pitch2 + lch2 + po_od_spx
+        # od_xr = od_xl + od_w
+        # if fg > 1:
+        #     od_box = BBox(od_xl, od_yb, od_xr, od_yt, res, unit_mode=True)
+        #     template.add_rect(od_name, od_box, nx=fg - 1, spx=sd_pitch, unit_mode=True)
+        #     # draw drain vias to connection layer
+        #     d_yb, d_yt = d_y_list[-1]
+        #     self._draw_vertical_vias(template=template,
+        #                              lch_unit=lch_unit,
+        #                              x0=(od_xl + od_xr) / 2,
+        #                              num=fg - 1,
+        #                              pitch=sd_pitch,
+        #                              mx_yb=d_y_list[-1][0] - sd_yc,
+        #                              mx_yt=d_y_list[-1][1] - sd_yc,
+        #                              start_layer=0,
+        #                              end_layer=1,
+        #                              )
 
         # draw body M1
         m1_name = lay_name_table[1]
