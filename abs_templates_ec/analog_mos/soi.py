@@ -245,7 +245,7 @@ class MOSTechSOIGenericBC(MOSTech):
             if bot_name in top_imp_info and bot_name in imp_sp_info:
                 top_margin = top_imp_info[bot_name]
                 imp_sp, join_flag = imp_sp_info[bot_name]
-                if join_flag == 2 or join_flag == 1 and bot_margin + top_margin + w < imp_sp:
+                if join_flag == 2 or (join_flag == 1 and bot_margin + top_margin + w < imp_sp):
                     imp_yb = -bot_margin
                     imp_yt = w + top_margin
                     if imp_yb < imp_yt:
@@ -713,8 +713,6 @@ class MOSTechSOIGenericBC(MOSTech):
             po_xcl = sd_pitch2 * 3
         else:
             po_xcl = sd_pitch2
-        od_xl = sd_pitch2 + lch2 + po_od_spx
-        od_xr = od_xl + od_w
 
         if (edge_mode & 2) == 0:
             po_box = BBox(width - sd_pitch2 - lch2, po_yb, width - sd_pitch2 + lch2,
@@ -730,6 +728,9 @@ class MOSTechSOIGenericBC(MOSTech):
             # draw dummy PO
             po_box = BBox(po_xcl - lch2, po_yb, po_xcl + lch2, po_yt, res, unit_mode=True)
             template.add_rect(po_name, po_box, nx=nx, spx=sd_pitch, unit_mode=True)
+        # Do not draw od dummy, because it is misidentified as a diffusion requiring a contact.
+        od_xl = sd_pitch2 + lch2 + po_od_spx
+        od_xr = od_xl + od_w
         if fg > 1:
             od_box = BBox(od_xl, od_yb, od_xr, od_yt, res, unit_mode=True)
             template.add_rect(od_name, od_box, nx=fg - 1, spx=sd_pitch, unit_mode=True)
